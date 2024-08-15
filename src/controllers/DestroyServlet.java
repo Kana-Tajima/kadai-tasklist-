@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdk.internal.org.jline.utils.ShutdownHooks.Task;
+import models.Task;
 import utils.DBUtil;
 
 /**
@@ -41,6 +41,7 @@ public class DestroyServlet extends HttpServlet {
             em.getTransaction().begin();
             em.remove(m);       // データ削除
             em.getTransaction().commit();
+            request.getSession().setAttribute("flush", "削除が完了しました。");
             em.close();
 
             // セッションスコープ上の不要になったデータを削除

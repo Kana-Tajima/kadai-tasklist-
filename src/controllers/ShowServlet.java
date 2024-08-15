@@ -3,13 +3,14 @@ package controllers;
 import java.io.IOException;
 
 import javax.persistence.EntityManager;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdk.internal.org.jline.utils.ShutdownHooks.Task;
+import models.Task;
 import utils.DBUtil;
 
 /**
@@ -39,7 +40,7 @@ public class ShowServlet extends HttpServlet {
 
         // メッセージデータをリクエストスコープにセットしてshow.jspを呼び出す
         request.setAttribute("task", m);
-
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/show.jsp");
         rd.forward(request, response);
     }
 }

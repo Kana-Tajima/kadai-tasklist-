@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdk.internal.org.jline.utils.ShutdownHooks.Task;
+import models.Task;
 import utils.DBUtil;
 
 /**
@@ -43,8 +43,9 @@ public class EditServlet extends HttpServlet {
         request.setAttribute("_token", request.getSession().getId());
 
         // メッセージIDをセッションスコープに登録
-        request.getSession().setAttribute("task_id", m.getId());
-
+        if(m != null) {
+            request.getSession().setAttribute("task_id", m.getId());
+        }
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/edit.jsp");
         rd.forward(request, response);
     }
